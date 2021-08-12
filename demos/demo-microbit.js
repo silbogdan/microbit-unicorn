@@ -47,10 +47,10 @@ main();
 async function main() {
     let firmware = await loadFirmware();
     
-    e.mem_map(FLASH_ADDRESS, FLASH_SIZE, uc.PROT_ALL);
-    e.mem_map(RAM_ADDRESS, MAX_RAM_SIZE, uc.PROT_ALL);
-    e.mem_write(FLASH_ADDRESS, firmware);
-    e.mem_write(FLASH_ADDRESS, int_to_bytes(sp));
+        e.mem_map(FLASH_ADDRESS, FLASH_SIZE, uc.PROT_ALL);
+        e.mem_map(RAM_ADDRESS, MAX_RAM_SIZE, uc.PROT_ALL);
+        e.mem_write(FLASH_ADDRESS, firmware);
+        e.mem_write(FLASH_ADDRESS, int_to_bytes(sp));
 }
 
 function int_to_bytes(n) {
@@ -60,13 +60,9 @@ function int_to_bytes(n) {
 async function loadFirmware() {
     let firmware = await fetch('http://localhost:8080/');
     firmware = await firmware.json();
-    return firmware.file;
-}
+    firmware = new Uint8Array(firmware.file.data);
 
-function text2Binary(string) {
-    return string.split('').map(function (char) {
-        return char.charCodeAt(0).toString(2);
-    }).join(' ');
+    return firmware;
 }
 
 //e.mem_write(FLASH_ADDRESS, firmware);
