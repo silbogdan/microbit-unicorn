@@ -4,9 +4,11 @@ var d = new cs.Capstone(cs.ARCH_ARM, cs.MODE_ARM);
 
 // Instruction Pointer
 function pcRead() {
+    console.log('Reading PC: ' + e.reg_read_i32(uc.ARM_REG_PC));
     return e.reg_read_i32(uc.ARM_REG_PC);
 }
 function pcWrite(value) {
+    console.log('Writing PC: ' + e.reg_write_i32(uc.ARM_REG_PC, value));
     return e.reg_write_i32(uc.ARM_REG_PC, value);
 }
 

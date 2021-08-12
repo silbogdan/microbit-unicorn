@@ -263,6 +263,7 @@ var paneAssembler = {
     emuStart: function () {
         var bytes = this.bytes();
         if (bytes.length > 0) {
+            // console.log('Writing at address: ' + this.address + ' bytes: ' + bytes.map(byte => byte.toString(2)));
             e.mem_write(this.address, bytes);
             e.emu_start(this.address, this.address+bytes.length, 0, 0);
             paneRegisters.update();

@@ -51,6 +51,7 @@ var uc = {
             MUnicorn.writeArrayToMemory(bytes, buffer_ptr);
             // Register write
             var handle = MUnicorn.getValue(this.handle_ptr, '*');
+            console.log("Reg write");
             var ret = MUnicorn.ccall('uc_reg_write', 'number',
                 ['pointer', 'number', 'pointer'],
                 [handle, regid, buffer_ptr]
@@ -99,6 +100,7 @@ var uc = {
 
             // Write to memory
             var handle = MUnicorn.getValue(this.handle_ptr, '*');
+            console.log(`Wrote in memory at ${address} bytes: ${bytes}.`);
             var ret = MUnicorn.ccall('uc_mem_write', 'number',
                 ['pointer', 'number', 'number', 'pointer', 'number'],
                 [handle, addr_lo, addr_hi, buffer_ptr, buffer_len]
@@ -300,6 +302,7 @@ var uc = {
         }
 
         this.emu_start = function (begin, until, timeout, count) {
+            console.log(`emu_start: (${begin}, ${until}, ${timeout}, ${count})`);
             var handle = MUnicorn.getValue(this.handle_ptr, '*');
             var ret = MUnicorn.ccall('uc_emu_start', 'number',
                 ['pointer', 'number', 'number', 'number', 'number', 'number', 'number', 'number'],
@@ -403,6 +406,7 @@ var uc = {
             }
             // Register write
             var handle = MUnicorn.getValue(this.handle_ptr, '*');
+            console.log(`Wrote in registry (type ${type}) at ${regid} value: ${value}.`);
             var ret = MUnicorn.ccall('uc_reg_write', 'number',
                 ['pointer', 'number', 'pointer'],
                 [handle, regid, value_ptr]
