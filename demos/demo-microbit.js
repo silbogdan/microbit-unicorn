@@ -41,10 +41,33 @@ paneRegisters.add(new Register('PC',  'i32', uc.ARM_REG_R15));
 paneRegisters.update();
 
 // Initialize MicroBIT binary
-emu.mem_map(FLASH_ADDRESS, FLASH_SIZE, uc.PROT_ALL);
-emu.mem_map(RAM_ADDRESS, MAX_RAM_SIZE, uc.PROT_ALL);
+//e.mem_map(FLASH_ADDRESS, FLASH_SIZE, uc.PROT_ALL);
+//e.mem_map(RAM_ADDRESS, MAX_RAM_SIZE, uc.PROT_ALL);
+main();
+async function main() {
+    let firmware = await loadFirmware();
+    
+    e.mem_map(FLASH_ADDRESS, FLASH_SIZE, uc.PROT_ALL);
+    e.mem_map(RAM_ADDRESS, MAX_RAM_SIZE, uc.PROT_ALL);
+    e.mem_write(FLASH_ADDRESS, firmware);
+    e.mem_write(FLASH_ADDRESS, int_to_bytes(sp));
+}
 
-let firmware = 'firmware'; // GET from server
+function int_to_bytes(n) {
+	return new Uint8Array([n, n >> 8, n >> 16, n >> 24]);
+}
 
-emu.mem_write(FLASH_ADDRESS, firmware);
-emu.mem_write(FLASH_ADDRESS, int_to_bytes(sp));
+async function loadFirmware() {
+    let firmware = await fetch('http://localhost:8080/');
+    firmware = await firmware.json();
+    return firmware.file;
+}
+
+function text2Binary(string) {
+    return string.split('').map(function (char) {
+        return char.charCodeAt(0).toString(2);
+    }).join(' ');
+}
+
+//e.mem_write(FLASH_ADDRESS, firmware);
+//e.mem_write(FLASH_ADDRESS, int_to_bytes(sp));

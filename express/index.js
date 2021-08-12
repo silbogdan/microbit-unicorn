@@ -1,9 +1,11 @@
 const app = require('express')();
+const fs = require('fs');
 const path = require('path');
 const PORT = 8080;
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './microbit_v2.bin'));
+    let file = fs.readFileSync('./microbit_v2.bin', 'binary');
+    res.status(200).json({file: file});
 });
 
 app.listen(PORT, () => {
