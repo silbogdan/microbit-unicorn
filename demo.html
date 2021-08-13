@@ -157,31 +157,21 @@
 
     <!-- Unicorn.js demo -->
     <script src="demos/demo.js"></script>
+    <script src="dist/unicorn-arm.min.js"></script>
+    <script src="demos/externals/capstone-arm.min.js"></script>
+
     <script>
       // Require.JS
-      requirejs.config({
-          shim: {
-              'demos/demo-microbit': [
-                'dist/unicorn-arm.min'
-              ],
-              'demos/demo-arm': [
-                'dist/unicorn-arm.min',
-                'demos/externals/keystone-arm.min',
-                'demos/externals/capstone-arm.min'],
-              'demos/demo-mips': [
-                'dist/unicorn-mips.min',
-                'demos/externals/keystone-mips.min',
-                'demos/externals/capstone-mips.min'],
-              'demos/demo-sparc': [
-                'dist/unicorn-sparc.min',
-                'demos/externals/keystone-sparc.min',
-                'demos/externals/capstone-sparc.min'],
-              'demos/demo-x86': [
-                'dist/unicorn-x86.min',
-                'demos/externals/keystone-x86.min',
-                'demos/externals/capstone-x86.min'],
-          }
-      });
+      // requirejs.config({
+      //     shim: {
+      //         'demos/demo-microbit': [
+      //           'dist/unicorn-arm.min',
+      //           'demos/externals/keystone-arm.min',
+      //           'demos/externals/capstone-arm.min'
+      //         ],
+              
+      //     }
+      // });
       // Get URL parameters
       function gup(name) {
           url = location.href;

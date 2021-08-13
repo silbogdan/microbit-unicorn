@@ -65,6 +65,7 @@ var uc = {
         }
 
         this.reg_read = function (regid, size) {
+            console.log('Reg read');
             // Allocate space for the output value
             var buffer_ptr = MUnicorn._malloc(size);
             for (var i = 0; i < size; i++) {
@@ -114,6 +115,7 @@ var uc = {
         }
 
         this.mem_read = function (address, size) {
+            console.log(`Read in memory at address ${address}, size ${size}`);
             // Allocate space for the output value
             var buffer_ptr = MUnicorn._malloc(size);
             for (var i = 0; i < size; i++) {
@@ -143,6 +145,7 @@ var uc = {
         }
 
         this.mem_map = function (address, size, perms) {
+            console.log(`Mapped memory at address ${address}, size ${size}`);
             // Convert address types
             var [addr_lo, addr_hi] = this.__address(address);
             
@@ -177,6 +180,7 @@ var uc = {
         }
 
         this.mem_unmap = function (address, size) {
+            console.log(`Unmapped memory at address ${address}, size ${size}`);
             // Convert address types
             var [addr_lo, addr_hi] = this.__address(address);
             
@@ -192,6 +196,7 @@ var uc = {
         }
 
         this.hook_add = function (type, user_callback, user_data, begin, end, extra) {
+            console.log(`Added hook of type ${type}`);
             var handle = MUnicorn.getValue(this.handle_ptr, '*');
             // Default arguments
             if (typeof user_data === 'undefined') {
