@@ -6,6 +6,10 @@ let ram_size = 128 * 1024;
 let sp = RAM_ADDRESS + ram_size;
 let INSTRUCTIONS_COUNT = 0;
 
+//Registers
+let REGISTER_START = 0xe0000000;
+let REGISTER_END = 0xe0040000;
+
 var d = new cs.Capstone(cs.ARCH_ARM, cs.MODE_THUMB);
 var e = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_THUMB);
 
@@ -52,7 +56,7 @@ function write_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, use
 }
 
 function read_unmapped_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
-    console.log (`mem read unmapped 0x${addr_lo.toString(16)}`); 
+    console.log (`mem read unmapppped 0x${(addr_lo>>>0).toString(16)}`); 
     console.log (`pc: 0x${pcRead().toString(16)}`);
     console.log (`sp: 0x${e.reg_read_i32(uc.ARM_REG_SP).toString(16)}`);
     let mem = e.mem_read (pcRead(), 2);
@@ -91,6 +95,13 @@ function interrupt_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi,
     }
 }
 
+function read_register(handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
+    console.log(`Read Register Address: ${(addr_lo>>>0).toString(16)}`);
+}
+
+function write_register(handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
+    console.log(`Write Register Address: ${(addr_lo>>>0).toString(16)}. ${value_lo.toString(16)}`);
+}
 
 main();
 async function main() {
@@ -100,6 +111,11 @@ async function main() {
 
     console.log (firmware[0] + (firmware[1] << 8) + (firmware[2] << 16) + (firmware[3] << 24));
     console.log (firmware[4] + (firmware[5] << 8) + (firmware[6] << 16) + (firmware[7] << 24));
+
+    //Map registers and hook em
+    e.mem_map(REGISTER_START, REGISTER_END - REGISTER_START, uc.PROT_ALL);
+    e.hook_add(uc.HOOK_MEM_READ, read_register, 0, REGISTER_START, REGISTER_END - REGISTER_START, 0);
+    e.hook_add(uc.HOOK_MEM_WRITE, write_register, 0, REGISTER_START, REGISTER_END - REGISTER_START, 0);
     
     e.reg_write_i32(uc.ARM_REG_SP, firmware[0] + (firmware[1] << 8) + (firmware[2] << 16) + (firmware[3] << 24));
     e.reg_write_i32(uc.ARM_REG_PC, firmware[4] + (firmware[5] << 8) + (firmware[6] << 16) + (firmware[7] << 24));
@@ -143,10 +159,6 @@ async function main() {
     }
 
     execution ();
-}
-
-function int_to_bytes(n) {
-	return new Uint8Array([n, n >> 8, n >> 16, n >> 24]);
 }
 
 async function loadFirmware() {
