@@ -6,7 +6,7 @@ const PORT = 8080;
 
 app.use(cors());
 
-var file = fs.readFileSync('./microbit_v2.bin');
+var file = fs.readFileSync('./unicorn_board.bin');
 console.log(file);
 
 app.get('/', (req, res) => {
