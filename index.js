@@ -1,3 +1,8 @@
+const uc = require('./dist/unicorn-arm.min.js');
+const cs = require('./demos/externals/capstone-arm.min.js');
+const fs = require('fs');
+
+//ADDRESS
 let FLASH_ADDRESS = 0x00000000;
 let FLASH_SIZE =  256*1024;
 let RAM_ADDRESS = 0x20000000;
@@ -22,29 +27,6 @@ function pcWrite(value) {
     console.log('Writing PC: ' + e.reg_write_i32(uc.ARM_REG_PC, value));
     return e.reg_write_i32(uc.ARM_REG_PC, value);
 }
-
-// Customization
-$('title').html('Unicorn.js: MicroBIT');
-$('.navbar-demo').html('MicroBIT');
-
-// Registers
-paneRegisters.add(new Register('R0',  'i32', uc.ARM_REG_R0));
-paneRegisters.add(new Register('R1',  'i32', uc.ARM_REG_R1));
-paneRegisters.add(new Register('R2',  'i32', uc.ARM_REG_R2));
-paneRegisters.add(new Register('R3',  'i32', uc.ARM_REG_R3));
-paneRegisters.add(new Register('R4',  'i32', uc.ARM_REG_R4));
-paneRegisters.add(new Register('R5',  'i32', uc.ARM_REG_R5));
-paneRegisters.add(new Register('R6',  'i32', uc.ARM_REG_R6));
-paneRegisters.add(new Register('R7',  'i32', uc.ARM_REG_R7));
-paneRegisters.add(new Register('R8',  'i32', uc.ARM_REG_R8));
-paneRegisters.add(new Register('R9',  'i32', uc.ARM_REG_R9));
-paneRegisters.add(new Register('R10', 'i32', uc.ARM_REG_R10));
-paneRegisters.add(new Register('R11', 'i32', uc.ARM_REG_R11));
-paneRegisters.add(new Register('R12', 'i32', uc.ARM_REG_R12));
-paneRegisters.add(new Register('SP',  'i32', uc.ARM_REG_R13));
-paneRegisters.add(new Register('LR',  'i32', uc.ARM_REG_R14));
-paneRegisters.add(new Register('PC',  'i32', uc.ARM_REG_R15));
-paneRegisters.update();
 
 function read_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
     console.log (`mem read 0x${addr_lo.toString(16)}`); 
@@ -96,13 +78,13 @@ function interrupt_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi,
 }
 
 function read_register(handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
-    console.log("Read");
-    //console.log(`Read Register Address: ${(addr_lo>>>0).toString(16)}`);
+    //console.log("Read");
+    console.log(`Read Register Address: ${(addr_lo>>>0).toString(16)}`);
 }
 
 function write_register(handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
-    console.log("Write");
-    //console.log(`Write Register Address: ${(addr_lo>>>0).toString(16)}. ${(value_lo>>>0).toString(16)}`);
+    //console.log("Write");
+    console.log(`Write Register Address: ${(addr_lo>>>0).toString(16)}. ${(value_lo>>>0).toString(16)}`);
 }
 
 main();
@@ -116,7 +98,7 @@ async function main() {
 
     //Map registers and hook em
     e.mem_map(REGISTER_START, REGISTER_END - REGISTER_START, uc.PROT_ALL);
-    //e.hook_add(uc.HOOK_MEM_READ, read_register, 0, REGISTER_START, REGISTER_END - REGISTER_START, 0);
+    e.hook_add(uc.HOOK_MEM_READ, read_register, 0, REGISTER_START, REGISTER_END - REGISTER_START, 0);
     e.hook_add(uc.HOOK_MEM_WRITE, write_register, 0, REGISTER_START, REGISTER_END - REGISTER_START, 0);
     
     e.reg_write_i32(uc.ARM_REG_SP, firmware[0] + (firmware[1] << 8) + (firmware[2] << 16) + (firmware[3] << 24));
@@ -149,7 +131,8 @@ async function main() {
             // mem = e.mem_read (pc, 2);
             // disasm = d.disasm (mem, 0);
             // console.log ("executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
-            setTimeout (execution, 0);
+            //setTimeout (execution, 0);
+            requestAnimationFrame(execution);
         }
         catch (err) {
             console.log (err    );
@@ -163,9 +146,7 @@ async function main() {
     execution ();
 }
 
-async function loadFirmware() {
-    let firmware = await fetch('http://localhost:8080/');
-    firmware = await firmware.json();
-    firmware = new Uint8Array(firmware.file.data);
+function loadFirmware() {
+    firmware = new Uint8Array(fs.readFileSync('./express/unicorn_board.bin'));
     return firmware;
 }

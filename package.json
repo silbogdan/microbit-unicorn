@@ -7,7 +7,9 @@
     "type": "git",
     "url": "https://github.com/AlexAltea/unicorn.js.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "requirejs": "^2.3.6"
+  },
   "devDependencies": {
     "bower": "^1.8.8",
     "grunt": "^1.3.0",
