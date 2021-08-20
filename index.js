@@ -18,6 +18,53 @@ let REGISTER_END = 0xe0040000;
 var d = new cs.Capstone(cs.ARCH_ARM, cs.MODE_THUMB);
 var e = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_THUMB);
 
+class NVIC {
+    BASE_ADDR = 0xe000e000;
+    ICTR_ADDR = this.BASE_ADDR + 0x4;
+    ICER_ADDR = this.BASE_ADDR + 0x180;
+    ICPR_ADDR = this.BASE_ADDR + 0x280;
+
+    interrupts = 16;
+
+    enable_interrupts = [ ];
+    pending_interrupts = [ ];
+
+    in_range(address) {
+        if (address >= 0xe000e000 && address <= 0xe000e7f0) {
+            return true;
+        }
+        return false;
+    } 
+
+    write(address, value) {
+        if (address >= this.ICER_ADDR && address < this.ICER_ADDR + (((this.interrupts / 32) >>> 0) + 1)) {
+            let offset = (address - this.ICER_ADDR) / 4;
+            let current_interrupt = 0;
+            while (value !== 0) {
+                if (value & 0x1 === 1) {
+                    let interrupt = offset * 32 + current_interrupt;
+                    // console.log(`Clear pending interrupt ${interrupt}`);
+                    this.enable_interrupts[interrupt] = false;
+                }
+                current_interrupt++;
+                value = value >>> 1;
+            }
+
+            console.log(this.enable_interrupts);
+        }
+    }
+
+    // TODO: Set for enable and disable, clear for enable 
+
+    read(address) {
+        if (address = this.ICTR_ADDR) {
+            e.mem_write(address, Buffer.from([(this.interrupts / 32)>>>0]))
+        }
+    }
+}
+
+let nvic = new NVIC();
+
 // Instruction Pointer
 function pcRead() {
     // console.log('Reading PC: ' + e.reg_read_i32(uc.ARM_REG_PC));
@@ -29,14 +76,39 @@ function pcWrite(value) {
 }
 
 function read_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
-    if((addr_lo>>>0).toString(16) == 'e000e004')
-        console.log(value_lo);
-    //console.log (`mem read 0x${(addr_lo>>>0).toString(16)}`); 
+    let address = addr_lo >>> 0;
+    if (nvic.in_range(address)) {
+        nvic.read(address);
+    }
+    // if((addr_lo>>>0) === 0xe000e004) {
+    //     console.log('Trying to write to 0xe000e004: ');
+    //     console.log(Buffer.from([(nvic.interrupts / 32)>>>0]));
+    //     e.mem_write(0xe000e004, Buffer.from([(nvic.interrupts / 32)>>>0]));
+    //     console.log(`ICTR: type: ${type}, addr_hi: ${addr_hi}, size: ${size}, value_lo: ${value_lo}, value_hi: ${value_hi}, user_data: ${user_data}`);
+    // }
+//     console.log (`mem read 0x${(addr_lo>>>0).toString(16)}`); 
+//     console.log('Mem read: at ' + pcRead().toString(16));
+//     let mem = e.mem_read (pcRead(), 2);
+//     try {
+//         let disasm = d.disasm (mem, 0);
+   
+//         if (disasm[0])
+//         {
+//             console.log (" -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
+//         }
+//     } catch (e) {
+//         console.log(e);
+//     }
 }
 
 
 function write_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
-    //console.log (`mem write 0x${(addr_lo>>>0).toString(16)} -> 0x${(value_lo>>>0).toString(16)}`); 
+    // console.log (`mem write 0x${(addr_lo>>>0).toString(16)} -> 0x${(value_lo>>>0).toString(16)}`); 
+    let address = addr_lo >>> 0;
+    let value = value_lo >>> 0;
+    if (nvic.in_range(address)) {
+        nvic.write(address, value);
+    }
 }
 
 function read_unmapped_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
@@ -107,46 +179,49 @@ async function main() {
 
     //e.hook_add (uc.HOOK_MEM_WRITE, write_fn, 0, RAM_ADDRESS, RAM_ADDRESS+MAX_RAM_SIZE, 0);
     //e.hook_add (uc.HOOK_MEM_READ, read_fn, 0, RAM_ADDRESS, RAM_ADDRESS+MAX_RAM_SIZE, 0);
-    e.hook_add (uc.HOOK_MEM_READ_UNMAPPED, read_unmapped_fn);
-    e.hook_add (uc.HOOK_MEM_WRITE_UNMAPPED, write_unmapped_fn);
-    e.hook_add (uc.HOOK_INTR, interrupt_fn);
+    // e.hook_add (uc.HOOK_MEM_READ_UNMAPPED, read_unmapped_fn);
+    // e.hook_add (uc.HOOK_MEM_WRITE_UNMAPPED, write_unmapped_fn);
+    // e.hook_add (uc.HOOK_INTR, interrupt_fn);
 
     //Map registers and hook em
     e.mem_map(REGISTER_START, REGISTER_END - REGISTER_START, uc.PROT_ALL);
     e.hook_add(uc.HOOK_MEM_READ, read_fn, 0, REGISTER_START, REGISTER_END - REGISTER_START);
     e.hook_add(uc.HOOK_MEM_WRITE, write_fn, 0, REGISTER_START, REGISTER_END - REGISTER_START);
 
-    e.mem_write(0xe000e004, Uint8Array.from([1]));
     e.mem_write(FLASH_ADDRESS, firmware);
 
     function execution () {
 
+        
+        let pc = pcRead ();
+        let mem = e.mem_read (pc, 2);
         try
         {
-            let pc = pcRead ();
-            let mem = e.mem_read (pc, 2);
-            let disasm = d.disasm (mem, 0);
+        let disasm = d.disasm (mem, 0);
             if (disasm[0]) {
-                console.log ("executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
+                // console.log ("(from execution) executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
+                process.stdout.write(pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str + '\r');
             }
-            e.emu_start(pc | 1, FLASH_ADDRESS+FLASH_SIZE, 0, -1);
             // lpc = pcRead ();
             // mem = e.mem_read (pc, 2);
             // disasm = d.disasm (mem, 0);
             // console.log ("executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
             //setTimeout (execution, 0);
-            requestAnimationFrame(execution);
+            // requestAnimationFrame(execution);
         }
         catch (err) {
-            console.log (err    );
             // let pc = pcRead ();
             // let mem = e.mem_read (pc, 2);
             // let disasm = d.disasm (mem, 0);
             // console.log ("executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
         }
+        e.emu_start(pc | 1, FLASH_ADDRESS+FLASH_SIZE, 0, 1);
+
     }
 
-    execution ();
+    while (1) { 
+        execution ();
+    }
 }
 
 function loadFirmware() {
