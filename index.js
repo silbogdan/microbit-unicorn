@@ -23,6 +23,8 @@ class NVIC {
     ICTR_ADDR = this.BASE_ADDR + 0x4;
     ICER_ADDR = this.BASE_ADDR + 0x180;
     ICPR_ADDR = this.BASE_ADDR + 0x280;
+    ISER_ADDR = this.BASE_ADDR + 0x100;
+    ISPR_ADDR = this.BASE_ADDR + 0x200;
 
     interrupts = 16;
 
@@ -43,14 +45,48 @@ class NVIC {
             while (value !== 0) {
                 if (value & 0x1 === 1) {
                     let interrupt = offset * 32 + current_interrupt;
-                    // console.log(`Clear pending interrupt ${interrupt}`);
+                    //console.log(`Clear enable interrupt ${interrupt}`);
                     this.enable_interrupts[interrupt] = false;
                 }
                 current_interrupt++;
                 value = value >>> 1;
             }
-
-            console.log(this.enable_interrupts);
+        } else if(address >= this.ICPR_ADDR && address < this.ICPR_ADDR + (((this.interrupts / 32) >>> 0) + 1)) {
+            let offset = (address - this.ICPR_ADDR) / 4;
+            let current_interrupt = 0;
+            while (value !== 0) {
+                if (value & 0x1 === 1) {
+                    let interrupt = offset * 32 + current_interrupt;
+                    //console.log(`Clear pending interrupt ${interrupt}`);
+                    this.pending_interrupts[interrupt] = false;
+                }
+                current_interrupt++;
+                value = value >>> 1;
+            } 
+        } else if(address >= this.ISER_ADDR && address < this.ISER_ADDR + (((this.interrupts / 32) >>> 0) + 1)) {
+            let offset = (address - this.ISER_ADDR) / 4;
+            let current_interrupt = 0;
+            while(value !== 0) {
+                if (value & 0x1 === 1) {
+                    let interrupt = offset * 32 + current_interrupt;
+                    //console.log(`Set enable interrupt ${interrupt}`);
+                    this.enable_interrupts[interrupt] = true;
+                }
+                current_interrupt++;
+                value = value >>> 1;
+            }
+        } else if(address >= this.ISPR_ADDR && address < this.ISPR_ADDR + (((this.interrupts / 32) >>> 0) + 1)) {
+            let offset = (address - this.ISPR_ADDR) / 4;
+            let current_interrupt = 0;
+            while(value !== 0) {
+                if (value & 0x1 === 1) {
+                    let interrupt = offset * 32 + current_interrupt;
+                    //console.log(`Set pending interrupt ${interrupt}`);
+                    this.pending_interrupts[interrupt] = true;
+                }
+                current_interrupt++;
+                value = value >>> 1;
+            }
         }
     }
 
