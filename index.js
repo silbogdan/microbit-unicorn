@@ -18,6 +18,26 @@ let REGISTER_END = 0xe0040000;
 var d = new cs.Capstone(cs.ARCH_ARM, cs.MODE_THUMB);
 var e = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_THUMB);
 
+class UART {
+    ADDR = 0x40002000;
+    END_ADDR = 0x40002004;
+
+    in_range(address) {
+        if(address >= this.ADDR && address <= this.END_ADDR) {
+            return true;
+        }
+        return false;
+    }
+
+    read(address) {
+        console.log("..");
+    }
+
+    write(address, value) {
+        console.log("write uart");
+    }
+};
+
 class NVIC {
     BASE_ADDR = 0xe000e000;
     ICTR_ADDR = this.BASE_ADDR + 0x4;
@@ -100,6 +120,7 @@ class NVIC {
 }
 
 let nvic = new NVIC();
+let uart = new UART();
 
 // Instruction Pointer
 function pcRead() {
@@ -115,6 +136,8 @@ function read_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user
     let address = addr_lo >>> 0;
     if (nvic.in_range(address)) {
         nvic.read(address);
+    } else if (uart.in_range(address)) {
+        uart.read(address);
     }
     // if((addr_lo>>>0) === 0xe000e004) {
     //     console.log('Trying to write to 0xe000e004: ');
@@ -135,7 +158,7 @@ function read_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user
 //     } catch (e) {
 //         console.log(e);
 //     }
-}
+};
 
 
 function write_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, user_data) {
@@ -144,6 +167,8 @@ function write_fn (handle, type, addr_lo, addr_hi, size, value_lo, value_hi, use
     let value = value_lo >>> 0;
     if (nvic.in_range(address)) {
         nvic.write(address, value);
+    } else if (uart.in_range(address)) {
+        uart.write(address, value);
     }
 }
 
