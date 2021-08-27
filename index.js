@@ -1,6 +1,7 @@
 const uc = require('./dist/unicorn-arm.min.js');
 const cs = require('./demos/externals/capstone-arm.min.js');
 const fs = require('fs');
+const { start } = require('repl');
 
 //ADDRESS
 let FLASH_ADDRESS = 0x00000000;
@@ -15,26 +16,27 @@ let INSTRUCTIONS_COUNT = 0;
 let REGISTER_START = 0xe0000000;
 let REGISTER_END = 0xe0040000;
 
+//UART
+let UART_START = 0x40002000;
+let UART_END = 0x40002004;
+
 var d = new cs.Capstone(cs.ARCH_ARM, cs.MODE_THUMB);
 var e = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_THUMB);
 
 class UART {
-    ADDR = 0x40002000;
-    END_ADDR = 0x40002004;
-
     in_range(address) {
-        if(address >= this.ADDR && address <= this.END_ADDR) {
+        if(address >= UART_START && address <= UART_END) {
             return true;
         }
         return false;
     }
 
     read(address) {
-        console.log("..");
+        console.log(e.mem_read(address, 1));
     }
 
     write(address, value) {
-        console.log("write uart");
+        process.stdout.write(String.fromCharCode(value));
     }
 };
 
@@ -240,14 +242,17 @@ async function main() {
 
     //e.hook_add (uc.HOOK_MEM_WRITE, write_fn, 0, RAM_ADDRESS, RAM_ADDRESS+MAX_RAM_SIZE, 0);
     //e.hook_add (uc.HOOK_MEM_READ, read_fn, 0, RAM_ADDRESS, RAM_ADDRESS+MAX_RAM_SIZE, 0);
-    // e.hook_add (uc.HOOK_MEM_READ_UNMAPPED, read_unmapped_fn);
-    // e.hook_add (uc.HOOK_MEM_WRITE_UNMAPPED, write_unmapped_fn);
+    //e.hook_add (uc.HOOK_MEM_READ_UNMAPPED, read_unmapped_fn);
+    //e.hook_add (uc.HOOK_MEM_WRITE_UNMAPPED, write_unmapped_fn);
     // e.hook_add (uc.HOOK_INTR, interrupt_fn);
 
     //Map registers and hook em
     e.mem_map(REGISTER_START, REGISTER_END - REGISTER_START, uc.PROT_ALL);
     e.hook_add(uc.HOOK_MEM_READ, read_fn, 0, REGISTER_START, REGISTER_END - REGISTER_START);
     e.hook_add(uc.HOOK_MEM_WRITE, write_fn, 0, REGISTER_START, REGISTER_END - REGISTER_START);
+
+    //Map uart
+    e.mem_map(0x40000000, 0x50000000 - 0x40000000, uc.PROT_ALL);
 
     e.mem_write(FLASH_ADDRESS, firmware);
 
@@ -261,7 +266,7 @@ async function main() {
         let disasm = d.disasm (mem, 0);
             if (disasm[0]) {
                 // console.log ("(from execution) executing " + pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str);
-                process.stdout.write(pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str + '\r');
+                // process.stdout.write(pc.toString (16) + " -> " + disasm[0].mnemonic + " " + disasm[0].op_str + '\r');
             }
             // lpc = pcRead ();
             // mem = e.mem_read (pc, 2);

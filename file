@@ -1,0 +1,793 @@
+Uint8Array(12288) [
+    0, 16, 0, 32, 217, 16, 0, 0, 149, 16, 0, 0,
+   17, 17, 0,  0, 149, 16, 0, 0, 149, 16, 0, 0,
+  149, 16, 0,  0, 149, 16, 0, 0, 149, 16, 0, 0,
+  149, 16, 0,  0, 149, 16, 0, 0,  13, 16, 0, 0,
+  149, 16, 0,  0, 149, 16, 0, 0, 149, 16, 0, 0,
+  245, 15, 0,  0,  77, 16, 0, 0,  77, 16, 0, 0,
+   77, 16, 0,  0,  77, 16, 0, 0,  77, 16, 0, 0,
+   77, 16, 0,  0,  77, 16, 0, 0,  77, 16, 0, 0,
+   77, 16, 0,  0,
+  ... 12188 more items
+]
+536875008
+4313
+10d8 -> ldr r0, [pc, #0x20]
+10da -> ldr r1, [pc, #0x24]
+10dc -> movs r2, #0
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e2 -> stm r0!, {r2}
+10e4 -> b #0xfffffffa
+10de -> cmp r1, r0
+10e0 -> beq #6
+10e6 -> ldr r0, [pc, #0x1c]
+10e8 -> ldr r1, [pc, #0x1c]
+10ea -> ldr r2, [pc, #0x20]
+10ec -> cmp r1, r0
+10ee -> beq #8
+51c -> push {r7, lr}
+51e -> mov r7, sp
+1564 -> ldr r0, [pc, #0x34]
+156a -> ldr r0, [r0]
+1570 -> ldr r2, [r0, #4]
+1576 -> adds r2, #1
+1578 -> cbz r2, #8
+157a -> stm r1!, {r3}
+157c -> subs r2, #1
+157e -> b #0xfffffffa
+1578 -> cbz r2, #8
+1584 -> ldr r0, [r0, #4]
+158e -> adds r0, #1
+1590 -> cbz r0, #8
+1592 -> stm r1!, {r2}
+1594 -> subs r0, #1
+1596 -> b #0xfffffffa
+1590 -> cbz r0, #8
+fd0 -> ldr r0, [pc, #0x1c]
+fd6 -> ldr r1, [r0]
+fdc -> ldr r1, [r1, #4]
+fe2 -> adds r1, #1
+fe4 -> cbz r1, #8
+fe6 -> stm r0!, {r2}
+fe8 -> subs r1, #1
+fea -> b #0xfffffffa
+fe4 -> cbz r1, #8
+fec -> bx lr
+524 -> ldr r0, [pc, #8]
+526 -> movs r1, #0xd
+528 -> ldr r2, [pc, #8]
+53c -> push {r7, lr}
+53e -> mov r7, sp
+540 -> sub sp, #0x20
+542 -> mov ip, r2
+54c -> movs r3, #0
+552 -> mov r0, sp
+554 -> str r2, [sp, #0x10]
+556 -> movs r2, #1
+558 -> mov r1, ip
+55a -> str r2, [sp, #4]
+55c -> add r2, sp, #0x18
+55e -> str r3, [sp, #0x14]
+564 -> str r2, [sp]
+668 -> push {r7, lr}
+66a -> mov r7, sp
+66c -> sub sp, #0x10
+67a -> str r0, [sp, #4]
+684 -> str r0, [sp]
+686 -> mov r0, sp
+510 -> push {r7, lr}
+512 -> mov r7, sp
+410 -> push {r7, lr}
+412 -> mov r7, sp
+414 -> sub sp, #0x30
+416 -> str r0, [sp, #4]
+41c -> ldr r0, [pc, #0x98]
+41e -> movs r6, #0
+424 -> movs r4, #2
+426 -> str r0, [sp, #0x18]
+42c -> ldr r0, [pc, #0x8c]
+42e -> ldr r5, [pc, #0x94]
+43c -> str r4, [sp, #0x1c]
+43e -> str r0, [sp, #0x14]
+440 -> add r0, sp, #4
+442 -> str r0, [sp, #0x10]
+444 -> add r1, sp, #0x18
+446 -> mov r0, sl
+448 -> blx r5
+3a0 -> push {r4, r5, r6, r7, lr}
+3a2 -> add r7, sp, #0xc
+3a8 -> sub sp, #0x20
+3aa -> str r0, [sp, #4]
+3ac -> add r2, sp, #8
+3b2 -> mov r0, r2
+3b4 -> ldr r1, [pc, #0x10]
+3ba -> add r0, sp, #4
+c12 -> push {r4, r5, r6, r7, lr}
+c14 -> add r7, sp, #0xc
+c1a -> sub sp, #0x2c
+c1c -> mov r8, r2
+c1e -> movs r2, #3
+c28 -> movs r2, #0x20
+c2a -> str r2, [sp, #0xc]
+c2c -> movs r2, #0
+c2e -> cmp r6, #0
+c30 -> str r2, [sp, #8]
+c36 -> str r2, [sp, #0x18]
+c38 -> str r2, [sp, #0x10]
+c3a -> beq #0xdc
+d1e -> cmp r0, r2
+d20 -> it hi
+d24 -> cbz r0, #0x46
+d2e -> mov sl, r2
+d30 -> movs r4, #0
+d32 -> mov r6, r0
+d38 -> ldr r2, [r0, #4]
+d3a -> cbz r2, #0x10
+d44 -> ldr r3, [r3, #0xc]
+d46 -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4f8 -> movs r3, #1
+4fa -> strb r3, [r0]
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 13
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 10
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d48 -> cbnz r0, #0x3e
+d52 -> ldr r2, [r1, #4]
+d54 -> mov r1, sb
+d56 -> blx r2
+240 -> push {r4, r5, r6, r7, lr}
+242 -> add r7, sp, #0xc
+248 -> sub sp, #0x38
+24e -> movs r2, #0xc
+250 -> ldr r3, [r5, #0xc]
+252 -> ldr r1, [pc, #0xa4]
+258 -> mov r0, r4
+25a -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 112
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 110
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 105
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 99
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 107
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 101
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 100
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 32
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 116
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 32
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+25c -> cbz r0, #6
+266 -> cbz r0, #8
+268 -> str r0, [sp, #4]
+26a -> ldr r0, [pc, #0x90]
+26c -> b #0x1c
+288 -> str r0, [sp, #0xc]
+28a -> add r0, sp, #4
+28c -> movs r6, #1
+28e -> str r0, [sp, #8]
+290 -> str r6, [sp, #0x34]
+292 -> add r0, sp, #8
+294 -> str r0, [sp, #0x30]
+296 -> movs r0, #0
+298 -> str r0, [sp, #0x2c]
+29a -> mov r1, r5
+29c -> str r0, [sp, #0x28]
+29e -> movs r0, #2
+2a0 -> str r0, [sp, #0x24]
+2a2 -> ldr r0, [pc, #0x5c]
+2a4 -> str r0, [sp, #0x20]
+2a6 -> add r2, sp, #0x20
+2a8 -> mov r0, r4
+c12 -> push {r4, r5, r6, r7, lr}
+c14 -> add r7, sp, #0xc
+c1a -> sub sp, #0x2c
+c1c -> mov r8, r2
+c1e -> movs r2, #3
+c28 -> movs r2, #0x20
+c2a -> str r2, [sp, #0xc]
+c2c -> movs r2, #0
+c2e -> cmp r6, #0
+c30 -> str r2, [sp, #8]
+c36 -> str r2, [sp, #0x18]
+c38 -> str r2, [sp, #0x10]
+c3a -> beq #0xdc
+d1e -> cmp r0, r2
+d20 -> it hi
+d24 -> cbz r0, #0x46
+d2e -> mov sl, r2
+d30 -> movs r4, #0
+d32 -> mov r6, r0
+d38 -> ldr r2, [r0, #4]
+d3a -> cbz r2, #0x10
+d44 -> ldr r3, [r3, #0xc]
+d46 -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 39
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d48 -> cbnz r0, #0x3e
+d52 -> ldr r2, [r1, #4]
+d54 -> mov r1, sb
+d56 -> blx r2
+dde -> push {r4, r5, r6, r7, lr}
+de0 -> add r7, sp, #0xc
+de6 -> sub sp, #0x18
+dec -> mov r2, sp
+df2 -> mov r3, r2
+dfc -> mov r0, ip
+c12 -> push {r4, r5, r6, r7, lr}
+c14 -> add r7, sp, #0xc
+c1a -> sub sp, #0x2c
+c1c -> mov r8, r2
+c1e -> movs r2, #3
+c28 -> movs r2, #0x20
+c2a -> str r2, [sp, #0xc]
+c2c -> movs r2, #0
+c2e -> cmp r6, #0
+c30 -> str r2, [sp, #8]
+c36 -> str r2, [sp, #0x18]
+c38 -> str r2, [sp, #0x10]
+c3a -> beq #0xdc
+d1e -> cmp r0, r2
+d20 -> it hi
+d24 -> cbz r0, #0x46
+d6a -> movs r0, #0
+d6c -> cmp r2, r0
+d6e -> bls #0x1c
+d70 -> mov r1, r0
+d7a -> ldr r2, [r0, #4]
+d80 -> ldr r3, [r3, #0xc]
+d82 -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 65
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 109
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 32
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 106
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 117
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 110
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 115
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 32
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 105
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 99
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 105
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d84 -> cbz r0, #6
+d8a -> movs r0, #0
+d8c -> add sp, #0x2c
+d92 -> pop {r4, r5, r6, r7, pc}
+e02 -> add sp, #0x18
+e08 -> pop {r4, r5, r6, r7, pc}
+d58 -> cbnz r0, #0x2e
+d5a -> adds r4, #1
+d5c -> mov r0, r6
+d5e -> cmp r6, r4
+d60 -> bne #0xffffffd2
+d62 -> mov r2, sl
+d64 -> cmp r2, r0
+d66 -> bls #0x24
+d68 -> b #8
+d70 -> mov r1, r0
+d7a -> ldr r2, [r0, #4]
+d80 -> ldr r3, [r3, #0xc]
+d82 -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 39
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 44
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 32
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d84 -> cbz r0, #6
+d8a -> movs r0, #0
+d8c -> add sp, #0x2c
+d92 -> pop {r4, r5, r6, r7, pc}
+2ae -> cbnz r0, #0x3e
+2b4 -> ldr r1, [pc, #0x58]
+2ba -> str r1, [sp, #0x1c]
+2c4 -> str r1, [sp, #0x10]
+2c6 -> ldr r1, [pc, #0x4c]
+2cc -> movs r0, #3
+2ce -> str r0, [sp, #0x34]
+2d0 -> add r1, sp, #8
+2d2 -> str r1, [sp, #0x30]
+2d4 -> movs r1, #0
+2da -> ldr r0, [pc, #0x3c]
+2dc -> str r1, [sp, #0x2c]
+2de -> mov r1, r5
+2e0 -> str r0, [sp, #0x20]
+2e2 -> add r2, sp, #0x20
+2e4 -> mov r0, r4
+c12 -> push {r4, r5, r6, r7, lr}
+c14 -> add r7, sp, #0xc
+c1a -> sub sp, #0x2c
+c1c -> mov r8, r2
+c1e -> movs r2, #3
+c28 -> movs r2, #0x20
+c2a -> str r2, [sp, #0xc]
+c2c -> movs r2, #0
+c2e -> cmp r6, #0
+c30 -> str r2, [sp, #8]
+c36 -> str r2, [sp, #0x18]
+c38 -> str r2, [sp, #0x10]
+c3a -> beq #0xdc
+d1e -> cmp r0, r2
+d20 -> it hi
+d24 -> cbz r0, #0x46
+d2e -> mov sl, r2
+d30 -> movs r4, #0
+d32 -> mov r6, r0
+d38 -> ldr r2, [r0, #4]
+d3a -> cbz r2, #0x10
+d52 -> ldr r2, [r1, #4]
+d54 -> mov r1, sb
+d56 -> blx r2
+c06 -> mov r3, r1
+c0c -> mov r0, r3
+89e -> push {r4, r5, r6, r7, lr}
+8a0 -> add r7, sp, #0xc
+8a6 -> sub sp, #4
+8a8 -> mov r4, r1
+8ae -> ldr r1, [r0, #0x10]
+8b0 -> mov sb, r2
+8b6 -> bne #0x2a
+8e0 -> cmp r1, #1
+b7e -> ldr r1, [r0, #0x18]
+b80 -> mov r2, sb
+b82 -> ldr r0, [r0, #0x1c]
+b84 -> ldr r3, [r0, #0xc]
+b86 -> mov r0, r1
+b88 -> mov r1, r4
+b8a -> add sp, #4
+b94 -> bx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 98
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 111
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 114
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 100
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 115
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 47
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 117
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 110
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 105
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 99
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 111
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 114
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 110
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 95
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 98
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 111
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 114
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 100
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 47
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 115
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 114
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 99
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 47
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 109
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 97
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 105
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 110
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 46
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 114
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 115
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d58 -> cbnz r0, #0x2e
+d5a -> adds r4, #1
+d5c -> mov r0, r6
+d5e -> cmp r6, r4
+d60 -> bne #0xffffffd2
+d32 -> mov r6, r0
+d38 -> ldr r2, [r0, #4]
+d3a -> cbz r2, #0x10
+d44 -> ldr r3, [r3, #0xc]
+d46 -> blx r3
+402 -> push {r7, lr}
+404 -> mov r7, sp
+406 -> ldr r0, [r0]
+4f4 -> ldrb r3, [r0]
+4f6 -> cbnz r3, #6
+4fc -> ldr r0, [pc, #0xc]
+4fe -> cbz r2, #0xc
+504 -> subs r2, #1
+506 -> str r3, [r0]
+1073750016 58
+508 -> b #0xfffffff6
+4fe -> cbz r2, #0xc
+50a -> bx lr
+40c -> movs r0, #0
+40e -> pop {r7, pc}
+d48 -> cbnz r0, #0x3e
+d52 -> ldr r2, [r1, #4]
+d54 -> mov r1, sb
+d56 -> blx r2
+56c -> push {r4, r5, r6, r7, lr}
+56e -> add r7, sp, #0xc
+574 -> sub sp, #0x34
+576 -> ldr r4, [r0]
+584 -> mov r6, r1
+58a -> cmp r4, r0
+594 -> blo #0x80
+618 -> cmp r4, #0x63
+61a -> ble #0xffffffe6
+61c -> uxth r0, r4
+626 -> lsrs r1, r1, #5
+62c -> add r2, sp, #0xc
+62e -> uxth r0, r0
+638 -> cmp r1, #0xa
+63a -> bge #0xffffffcc
+640 -> add r2, sp, #0xc
+642 -> adds r1, #0x30
+644 -> strb r1, [r2, r0]
+64a -> str r1, [sp]
+64c -> add r1, sp, #0xc
+64e -> movs r2, #0
+650 -> adds r3, r1, r0
+65a -> mov r0, r6
+6a0 -> push {r4, r5, r6, r7, lr}
+6a2 -> add r7, sp, #0xc
+6a8 -> sub sp, #0x14
+6aa -> mov r6, r0
+6ac -> ldr r0, [r0]
+6b2 -> mov sl, r3
+6b4 -> mov r3, r1
+6c2 -> it eq
+6c8 -> lsls r1, r0, #0x1d
+6ca -> bmi #0xa
+6cc -> movs r3, #0
+6d2 -> b #0x30
+702 -> ldr r1, [r6, #8]
+704 -> cmp r1, #1
+706 -> bne #0x36
+73c -> mov r2, r3
+73e -> b #4
+742 -> mov r0, r6
+744 -> mov r1, r5
+746 -> mov r3, fp
+85a -> push {r4, r5, r6, r7, lr}
+85c -> add r7, sp, #0xc
+862 -> mov r4, r3
+864 -> mov r5, r2
+866 -> mov r6, r0
+86c -> beq #0x14
+880 -> cbz r5, #0x16
+896 -> movs r0, #0
+89c -> pop {r4, r5, r6, r7, pc}
+74c -> cbz r0, #0x10
+75c -> ldr r1, [r6, #0x1c]
+75e -> mov r2, r8
+760 -> ldr r0, [r6, #0x18]
+762 -> ldr r3, [r1, #0xc]
+764 -> mov r1, sl
+766 -> add sp, #0x14
+770 -> bx r3
